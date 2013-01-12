@@ -1,0 +1,27 @@
+{
+  "name": "node-fsm-http",
+  "version": "0.0.0",
+  "description": "FSM that uses remote HTTP calls to allow state transitions",
+  "main": "lib/FSM-http.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dolphin278/fsm-http.git"
+  },
+  "keywords": [
+    "finite",
+    "state",
+    "machine",
+    "http",
+    "callbacks"
+  ],
+  "author": "Boris Egorov",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "node-fsm": "~0.0.0",
+    "request": "~2.12.0"
+  }
+}

@@ -1,0 +1,32 @@
+{
+    "nodes": [
+        {
+            "name": "A"
+        },
+        {
+            "name": "B"
+        },
+        {
+            "name": "C"
+        }
+    ],
+    "edges": [
+        {
+            "name": "AB",
+            "from": "A",
+            "to": "B",
+            "request": {
+                "uri": "http://localhost:8889/ok"
+            }
+        },
+        {
+            "name": "BC",
+            "from": "B",
+            "to": "C",
+            "request": {
+                "uri": "http://localhost:8889/fail"
+            }
+        }
+    ],
+    "currentState": "A"
+}
