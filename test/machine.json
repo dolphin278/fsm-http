@@ -4,7 +4,10 @@
             "name": "A"
         },
         {
-            "name": "B"
+            "name": "B",
+            "request": {
+                "uri": "http://localhost:8889/stateNotify"
+            }
         },
         {
             "name": "C"

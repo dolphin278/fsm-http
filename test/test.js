@@ -39,6 +39,13 @@ describe('FSM-http', function () {
             assert(fsm.currentState === "B");
         });
 
+        it('should make async HTTP request to /stateNotify', function (done) {
+            setTimeout(function () {
+                assert(serverLog['/stateNotify'] > 0);
+                done();
+            }, 100);
+        });
+
         describe('when then asked to follow BC', function () {
             var status = null;
             before(function (done) {
