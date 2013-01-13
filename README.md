@@ -16,6 +16,13 @@ In essence, you just provide your machine description the same way as for `node-
 var machine = {
     "nodes": [
         …
+        {
+            "name": "B",
+            "request": {
+                "uri": "http://localhost:8889/stateNotify"
+            }
+        },
+        …
     ],
     "edges": [
         {
@@ -41,6 +48,13 @@ now, you use same methods as for plain [node-fsm](https://github.com/dolphin278/
 `node-fsm-http` uses [`request`](https://github.com/mikeal/request) module to perform HTTP request, using `request` value as `option` value for request (module), so you have many options to pass data from your fsm to external endpoints (see ['request' documentation on 'options' object](https://github.com/mikeal/request#requestoptions-callback)), for example, you could specify different HTTP verbs to perform request, or provide request payload to pass form data to external HTTP endpoint, etc.
 
 If egge you trying to follow doesn't have `request` field, fsm decides that transition is successful by default.
+
+###State change HTTP notification
+
+State objects could also have `request` field. If specified, we make asynchronous HTTP request using this value as `request()` options object (same approach as for edge).
+
+**Important**: Regardless of this call result, machine will not change it state, even if remote enpoint returned error code.
+
 
 ## TODO:
 
