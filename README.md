@@ -54,10 +54,3 @@ If egge you trying to follow doesn't have `request` field, fsm decides that tran
 State objects could also have `request` field. If specified, we make asynchronous HTTP request using this value as `request()` options object (same approach as for edge).
 
 **Important**: Regardless of this call result, machine will not change it state, even if remote enpoint returned error code.
-
-
-## TODO:
-
-* Combine fsm's `data` field with `request` field subfields like `json` or `body`.
-* Update fsm's `data` field with result of HTTP query
-* Add HTTP notifications when state changes.
