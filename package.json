@@ -1,6 +1,6 @@
 {
   "name": "node-fsm-http",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "FSM that uses remote HTTP calls to allow state transitions",
   "main": "lib/FSM-http.js",
   "scripts": {
