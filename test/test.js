@@ -5,11 +5,25 @@ var FSMHttp = require('../lib/FSM-http.js');
 var machine = require('./machine.json');
 
 var serverLog = {};
+var contentLog = {};
 
 var server = http.createServer(function (req, res) {
     serverLog[req.url] = (serverLog[req.url] || 0) + 1;
+    contentLog[req.url] = '';
     res.writeHead((req.url === "/ok") ? 200 : 400);
-    res.end();
+    // console.log(req.url);
+    req.on('data', function (data) {
+      // console.log('req->', data.toString());
+        contentLog[req.url] += data;
+    });
+    req.on('end', function () {
+        res.end();  
+    });
+    // req.pipe(process.stdout);
+    // req.on('end', function () {
+    //   res.end();      
+    // });
+    
 });
 
 describe('FSM-http', function () {
@@ -44,6 +58,17 @@ describe('FSM-http', function () {
                 assert(serverLog['/stateNotify'] > 0);
                 done();
             }, 100);
+        });
+        
+        it('http request on transition should have fsm data in it', function (done) {
+            setTimeout(function () {
+                assert(contentLog['/ok']);
+                var parsedData = JSON.parse(contentLog['/ok']);
+                assert(parsedData);
+                assert(parsedData.customMachineData);
+                assert(parsedData.customMachineData === "someData");
+                done();
+            }, 100)
         });
 
         describe('when then asked to follow BC', function () {

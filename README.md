@@ -34,7 +34,10 @@ var machine = {
             }
         }
     ],
-    "currentState": "A"
+    "currentState": "A",
+    "data": {
+        "arbitraryDataField": "arbitraryDataValue"
+    }
 }
 
 /// then, you create fsm-http instance without `routerFunc`:
@@ -48,6 +51,9 @@ now, you use same methods as for plain [node-fsm](https://github.com/dolphin278/
 `node-fsm-http` uses [`request`](https://github.com/mikeal/request) module to perform HTTP request, using `request` value as `option` value for request (module), so you have many options to pass data from your fsm to external endpoints (see ['request' documentation on 'options' object](https://github.com/mikeal/request#requestoptions-callback)), for example, you could specify different HTTP verbs to perform request, or provide request payload to pass form data to external HTTP endpoint, etc.
 
 If egge you trying to follow doesn't have `request` field, fsm decides that transition is successful by default.
+
+###Passing fsm's data during request
+Your fsm may have `data` field specified. When fsm makes http request to check, whether it can change it state, `data` field value is mixed with `json` field of `request` property place on your fsm graph edge (`data` members takes precedence over values specified in `request` field).
 
 ###State change HTTP notification
 

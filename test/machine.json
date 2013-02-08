@@ -31,5 +31,8 @@
             }
         }
     ],
-    "currentState": "A"
+    "currentState": "A",
+    "data": {
+        "customMachineData": "someData"
+    }
 }
