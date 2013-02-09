@@ -55,6 +55,9 @@ If egge you trying to follow doesn't have `request` field, fsm decides that tran
 ###Passing fsm's data during request
 Your fsm may have `data` field specified. When fsm makes http request to check, whether it can change it state, `data` field value is mixed with `json` field of `request` property place on your fsm graph edge (`data` members takes precedence over values specified in `request` field).
 
+###Updating fsm's data
+If reqest for changing fsm state returns 'application/json' content type, json document it's containing got parsed, and fsm's data field is overwritten with this new value. This allows your http endpoint to alter your fsm data on the go.
+
 ###State change HTTP notification
 
 State objects could also have `request` field. If specified, we make asynchronous HTTP request using this value as `request()` options object (same approach as for edge).
