@@ -11,19 +11,20 @@ var server = http.createServer(function (req, res) {
     serverLog[req.url] = (serverLog[req.url] || 0) + 1;
     contentLog[req.url] = '';
     res.writeHead((req.url === "/ok") ? 200 : 400);
-    // console.log(req.url);
     req.on('data', function (data) {
-      // console.log('req->', data.toString());
         contentLog[req.url] += data;
     });
     req.on('end', function () {
+        if (req.url === '/ok') {
+            res.writeHead(200, {
+                'Content-Type': 'application/json'
+            });
+            res.write(JSON.stringify({
+                customMachineData: 'updatedDataValue'
+            }));
+        }
         res.end();  
     });
-    // req.pipe(process.stdout);
-    // req.on('end', function () {
-    //   res.end();      
-    // });
-    
 });
 
 describe('FSM-http', function () {
@@ -67,6 +68,15 @@ describe('FSM-http', function () {
                 assert(parsedData);
                 assert(parsedData.customMachineData);
                 assert(parsedData.customMachineData === "someData");
+                done();
+            }, 100)
+        });
+
+        it('after request, our fsm`s data field should have new value', function (done) {
+            setTimeout(function () {
+                assert(fsm.data);
+                assert(fsm.data.customMachineData);
+                assert(fsm.data.customMachineData === "updatedDataValue");
                 done();
             }, 100)
         });
