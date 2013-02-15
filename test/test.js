@@ -37,7 +37,8 @@ describe('FSM-http', function () {
 
     it('have fsm structure', function () {
         assert(fsm);
-        assert(fsm.graph, JSON.stringify(fsm));
+        assert(fsm.nodes, JSON.stringify(fsm));
+        assert(fsm.edges, JSON.stringify(fsm));
         assert(fsm.currentState === "A");
     });
 
