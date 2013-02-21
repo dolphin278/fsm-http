@@ -55,6 +55,11 @@ If egge you trying to follow doesn't have `request` field, fsm decides that tran
 ###Passing fsm's data during request
 Your fsm may have `data` field specified. When fsm makes http request to check, whether it can change it state, `data` field value is mixed with `json` field of `request` property place on your fsm graph edge (`data` members takes precedence over values specified in `request` field).
 
+### Passing requestData upon request
+Fsm's `.follow()` method can take arbitrary data as second parameter. These data will be passed during external HTTP request in `requestData` field.
+
+Note: Assigning `requestData` field made after mixing `data` field with `request` property of the edge we follow. So don't use `requestData` as a part of your machine since it will be always overwritten on state change request processing.
+
 ###Updating fsm's data
 If reqest for changing fsm state returns 'application/json' content type, json document it's containing got parsed, and fsm's data field is overwritten with this new value. This allows your http endpoint to alter your fsm data on the go.
 
@@ -63,3 +68,9 @@ If reqest for changing fsm state returns 'application/json' content type, json d
 State objects could also have `request` field. If specified, we make asynchronous HTTP request using this value as `request()` options object (same approach as for edge).
 
 **Important**: Regardless of this call result, machine will not change it state, even if remote enpoint returned error code.
+
+# Changelog
+
+## 3.0.0
+
+Support passing `requestData` to external HTTP endpoint as a part of external HTTP request. It may break you code, for prior versions.
