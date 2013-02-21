@@ -44,7 +44,7 @@ describe('FSM-http', function () {
 
     describe('when asked to follow AB', function () {
         before(function (done) {
-            fsm.follow('AB', done);
+            fsm.follow('AB', {someData:1}, done);
         });
 
         it('should call /ok path on stub server', function () {
@@ -69,6 +69,9 @@ describe('FSM-http', function () {
                 assert(parsedData);
                 assert(parsedData.customMachineData);
                 assert(parsedData.customMachineData === "someData");
+                assert(parsedData.requestData);
+                // Test for passed data
+                assert(parsedData.requestData.someData === 1);
                 done();
             }, 100)
         });
